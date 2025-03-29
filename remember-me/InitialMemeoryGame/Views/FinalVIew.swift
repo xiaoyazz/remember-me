@@ -15,15 +15,13 @@ struct FinalView: View {
         VStack {
             Text("Thank you for playing Memory Quest!")
                 .font(.largeTitle)
-                .padding()
+
             
-            Text("Your performance metrics have been recorded.")
-                .padding()
             
             VStack(alignment: .leading, spacing: 15) {
                 Text("Game Summary")
                     .font(.largeTitle)
-                    .padding(.bottom)
+
                 
                 Group {
                     Text("Round 1:")
@@ -35,6 +33,7 @@ struct FinalView: View {
                 Group {
                     Text("Round 2:")
                     Text(" - Correct: \(statsManager.stats.round2Correct) out of \(Questions.round2.count)")
+                    Text (" - Replay Audio to hear correct answers: \(statsManager.stats.round2AudioReplays)")
                     Text(String(format: " - Average Response Time: %.2f seconds", statsManager.stats.round2AverageResponseTime))
                     Text(String(format: " - Total Time: %.2f seconds", statsManager.stats.round2TotalTime))
                 }
@@ -45,12 +44,15 @@ struct FinalView: View {
                     Text(String(format: " - Average Response Time: %.2f seconds", statsManager.stats.round3AverageResponseTime))
                     Text(String(format: " - Total Time: %.2f seconds", statsManager.stats.round3TotalTime))
                 }
+                //Add if statment if they actually have been recored or not (Later on)
+                Text("Your performance metrics have been recorded.")
+                    .padding()
+                    .bold(true)
                 
                 Spacer()
             }
             .padding()
         }
-        .navigationTitle("Summary")
         .onAppear {
             let featureVector = statsManager.featureVector()
             print("Feature Vector: \(featureVector)")

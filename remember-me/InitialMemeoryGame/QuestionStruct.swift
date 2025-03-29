@@ -17,6 +17,9 @@ struct Question {
             self.answer = answer
             self.picture = picture
         }
+    var shouldBeSpoken: Bool {
+            return text.hasPrefix("Working Memory")
+        }
 }
 
 struct Questions {
@@ -35,28 +38,32 @@ struct Questions {
     
     // Round 2: Cognitive Ability (11 questions)
     static let round2: [Question] = [
-        Question(text: "Working Memory: Alex tells you a sequence: 7, 3, 5, 9. Repeat them in order.", options: ["7,3,5,9", "7,5,3,9", "3,7,5,9", "7,3,9,5"], answer: 0),
-        Question(text: "Narrative Recall: Was there Giraffes in the zoo picture", options: ["Lion", "Elephant", "Giraffe", "Zebra"], answer: 1),
+        Question(text: "Narrative Recall: Were there Giraffes in the zoo picture", options: ["Lion", "Elephant", "Giraffe", "Zebra"], answer: 1),
+        Question(text: "Working Memory: Mathew tells you a sequence: 7, 3, 5, 9. Select the correct order.", options: ["7,3,5,9", "7,5,3,9", "3,7,5,9", "7,3,9,5"], answer: 0),
         Question(text: "Route Planning: What is the most efficient order to visit Library, Grocery Store, and Post Office?", options: ["Library, Grocery, Post Office", "Grocery, Post Office, Library", "Post Office, Library, Grocery", "Library, Post Office, Grocery"], answer: 0),
         Question(text: "Pattern Recognition: What comes next: 2, 4, 8, 16, ?", options: ["32", "24", "20", "30"], answer: 0),
         Question(text: "Categorization: Which item does not belong: Apple, Banana, Carrot, Grape?", options: ["Apple", "Banana", "Carrot", "Grape"], answer: 2),
-        Question(text: "Logical Reasoning: If Alex > Ben > Chris, who is the shortest?", options: ["Alex", "Ben", "Chris", "Cannot determine"], answer: 2),
-        Question(text: "Working Memory (Letters): Alex says the letters: B, R, F, T. Repeat them in order.", options: ["B,R,F,T", "B,F,R,T", "T,F,R,B", "B,T,F,R"], answer: 0),
-        Question(text: "Narrative Recall: What was the first animal you saw at the zoo?", options: ["Tiger", "Monkey", "Bear", "Parrot"], answer: 0),
+        Question(text: "Working Memory: Mathew tells you a sequence: 5, 1, 8, 3, 7. Select the correct order.", options: ["5,1,8,3,7", "5,8,1,7,3", "1,5,7,8,3", "5,1,3,7,8"], answer: 0),
+        Question(text: "Logical Reasoning: If Mathew > Ben > Chris, who is the shortest?", options: ["Mathew", "Ben", "Chris", "Cannot determine"], answer: 2),
+        Question(text: "Working Memory: (Letters): Mathew says the letters: B, R, F, T. Select the correct order.", options: ["B,R,F,T", "B,F,R,T", "T,F,R,B", "B,T,F,R"], answer: 0),
+        Question(text: "Narrative Recall: Did it look cold in photo of the buildings", options: ["Yes", "No"], answer: 0),
         Question(text: "Route Planning: Which sequence is most efficient for visiting: Bank, Post Office, Pharmacy?", options: ["Bank, Post Office, Pharmacy", "Pharmacy, Bank, Post Office", "Post Office, Pharmacy, Bank", "Bank, Pharmacy, Post Office"], answer: 0),
         Question(text: "Pattern Recognition: Complete the series: 3, 6, 12, 24, ?", options: ["48", "36", "30", "42"], answer: 0),
-        Question(text: "Logical Puzzle: If Sara is older than Mia and Mia is older than Zoe, who is the youngest?", options: ["Sara", "Mia", "Zoe", "Cannot determine"], answer: 2)
+        Question(text: "Working Memory: Mathew tells you a sequence: 10, 20, 30. Select the correct order.", options: ["10,20,30", "20,30,10", "30,20,10", "10,30,20"], answer: 0),
+        Question(text: "Logical Puzzle: If Sara is older than Mia and Mia is older than Zoe, who is the youngest?", options: ["Sara", "Mia", "Zoe", "Cannot determine"], answer: 2),
+        Question(text: "Narrative Recall: How were the sudents feeling in the picture of the classroom of students", options: ["Happy", "Sad", "Angry" , "Suprised"], answer: 0),
+        Question(text: "Working Memory: Mathew tells you a sequence: 2, 9, 4, 6. Select the correct order.", options: ["2,9,4,6", "2,4,9,6", "4,2,6,9", "2,6,9,4"], answer: 0),
     ]
     
-    // Round 3: Executive Function & Multi-Tasking (8 questions)
+    // Round 3: Advanced Cognitive Ability (8 questions)
     static let round3: [Question] = [
-        Question(text: "Dual-Task: Solve 8 + 5", options: ["1.2", "1.3", "1.4", "1.5"], answer: 1),
+        Question(text: "Math: Solve 8 / 5", options: ["1.2", "1.6", "1.4", "1.5"], answer: 1),
         Question(text: "Complex Planning: What is the best order for Doctor, Grocery, Lunch?", options: ["Doctor, Grocery, Lunch", "Grocery, Doctor, Lunch", "Lunch, Doctor, Grocery", "Doctor, Lunch, Grocery"], answer: 0),
-        Question(text: "Distraction: What color was the bench Alex sat on?", options: ["Red", "Blue", "Green", "Yellow"], answer: 1),
-        Question(text: "Dual-Task: Solve 7 + 6", options: ["12", "13", "14", "15"], answer: 1),
+        Question(text: "Distraction: What color was the benches in the photo of the schoolyard", options: ["Red", "Brown", "Green", "Yellow"], answer: 1),
+        Question(text: "Math: Solve 7 + 6", options: ["12", "13", "14", "15"], answer: 1),
         Question(text: "Complex Planning: What is the best order for Meeting, Coffee, Work?", options: ["Meeting, Coffee, Work", "Coffee, Meeting, Work", "Work, Meeting, Coffee", "Meeting, Work, Coffee"], answer: 0),
         Question(text: "Distraction: Which icon appeared last on the screen?", options: ["Star", "Heart", "Moon", "Sun"], answer: 2),
-        Question(text: "Dual-Task: Solve 9 - 4", options: ["4", "5", "6", "7"], answer: 1),
+        Question(text: "Math: Solve 9 - 4", options: ["4", "5", "6", "7"], answer: 1),
         Question(text: "Complex Planning: Choose the best order for Laundry, Dinner, Exercise.", options: ["Laundry, Exercise, Dinner", "Dinner, Laundry, Exercise", "Exercise, Laundry, Dinner", "Laundry, Dinner, Exercise"], answer: 3)
     ]
 }

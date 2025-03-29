@@ -22,6 +22,9 @@ struct GameStats {
     var round1TotalTime: TimeInterval = 0
     var round2TotalTime: TimeInterval = 0
     var round3TotalTime: TimeInterval = 0
+    
+    //Repeated parts
+    var round2AudioReplays: Int = 0
 
     
     // Computed properties for average response times per round.
