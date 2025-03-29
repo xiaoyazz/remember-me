@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+// test
 
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
     @State private var email = ""
     @State private var password = ""
     @State private var accountType = "Patient"
+    @State private var navigateToHome = false
+    
     let accountOptions = ["Patient", "Caregiver", "Healthcare Pro"]
 
     var body: some View {
@@ -39,6 +42,7 @@ struct LoginView: View {
                 Button(action: {
                     // Handle firebase auth later
                     isLoggedIn = true
+                    navigateToHome = true
                 }) {
                     Text("Log In")
                         .frame(maxWidth: .infinity)
@@ -48,6 +52,9 @@ struct LoginView: View {
                         .cornerRadius(8)
                 }
 
+                NavigationLink(destination: HomeView(), isActive: $navigateToHome) {
+                    EmptyView()
+                }//
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Don't have an account? ")
