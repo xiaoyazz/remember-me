@@ -5,18 +5,13 @@
 //  Created by Xiaoya Zou on 2025-03-29.
 //
 
-// SOS button for when they are confused
-// 911 at top
-// Family / people who are important
-// Personal information card 
-// test by xiaoya
 
 import SwiftUI
 import MapKit
 
 struct SOSView: View {
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 45.4215, longitude: -75.6990), // Default to Ottawa
+        center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832),
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
 
@@ -27,7 +22,7 @@ struct SOSView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Who Am I")
                         .font(.headline)
-                    Text("Name: Jane Doe\nAge: 76\nMedical Conditions: Alzheimer’s\nAllergies: Penicillin")
+                    Text("Name: Jane Doe\nAge: 76\nMedical Conditions: Alzheimer’s\nAllergies: Penicillin\nAddress: 123 Main Street, Toronto, ON M4E 2V9")
                         .font(.body)
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
