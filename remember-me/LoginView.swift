@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+// test
 
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
@@ -53,7 +54,7 @@ struct LoginView: View {
 
                 NavigationLink(destination: HomeView(), isActive: $navigateToHome) {
                     EmptyView()
-                }
+                }//
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Don't have an account? ")
