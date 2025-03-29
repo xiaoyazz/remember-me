@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "cartoon-illustration-of-group-of-farm-animals-scenic-farm-animals-cow-pig-horse-chicken-hen-duck-sheep-cat-dog-vector.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
