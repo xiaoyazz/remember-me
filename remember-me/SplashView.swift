@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct SplashView: View {
+    @State private var isActive = false
+    @Binding var isLoggedIn: Bool
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if isActive {
+            LoginView(isLoggedIn: $isLoggedIn)
+        } else {
+            VStack {
+                Image("rm")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        isActive = true
+                    }
+                }
+            }
+        }
     }
 }
 
+
 #Preview {
-    SplashView()
+    SplashView(isLoggedIn: .constant(false))
 }

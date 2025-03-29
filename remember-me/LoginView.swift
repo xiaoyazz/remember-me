@@ -8,11 +8,64 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Binding var isLoggedIn: Bool
+    @State private var email = ""
+    @State private var password = ""
+    @State private var accountType = "Patient"
+    let accountOptions = ["Patient", "Caregiver", "Healthcare Pro"]
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            VStack(spacing: 20) {
+                
+//                Text("Please select your role:")
+//                    .font(.headline)
+//                    .foregroundColor(.gray)
+                
+                Picker("Account Type", selection: $accountType) {
+                    ForEach(accountOptions, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Button(action: {
+                    // Handle firebase auth later
+                    isLoggedIn = true
+                }) {
+                    Text("Log In")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+
+                
+                NavigationLink(destination: SignUpView()) {
+                    Text("Don't have an account? ")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                    + Text("Sign up")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                        .underline()
+                }
+
+
+            }
+            .padding()
+        }
     }
 }
 
+
 #Preview {
-    LoginView()
+    LoginView(isLoggedIn: .constant(false))
 }

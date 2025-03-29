@@ -9,9 +9,35 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.circle")
+                }
+
+            MemoryGamesView()
+                .tabItem {
+                    Label("Games", systemImage: "gamecontroller")
+                }
+
+            HealthView()
+                .tabItem {
+                    Label("Health", systemImage: "heart")
+                }
+
+            DailyPlannerView()
+                .tabItem {
+                    Label("Planner", systemImage: "calendar")
+                }
+
+            SOSView()
+                .tabItem {
+                    Label("SOS", systemImage: "exclamationmark.triangle")
+                }
+        }
     }
 }
+
 
 #Preview {
     HomeView()

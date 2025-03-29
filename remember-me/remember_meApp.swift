@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct remember_meApp: App {
+    
+    @State private var isLoggedIn = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView(isLoggedIn: $isLoggedIn)
         }
     }
 }
