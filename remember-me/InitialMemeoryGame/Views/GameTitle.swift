@@ -12,10 +12,11 @@ struct CustomTitleView: View {
 
     var body: some View {
         Text(title)
-            .font(.title2)
+            .font(.headline)
             .bold()
             .multilineTextAlignment(.leading)
             .lineLimit(nil)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
