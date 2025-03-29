@@ -30,8 +30,10 @@ struct HomeView: View {
     ]
 
     var body: some View {
-        TabView {
-            NavigationStack {
+
+        NavigationStack {
+            VStack(spacing: 0) {
+                // Scrollable Home Content
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         // Header
@@ -39,7 +41,7 @@ struct HomeView: View {
                             Text("Home")
                                 .font(.largeTitle)
                                 .bold()
-
+                          
                             Text("Good morning!")
                                 .font(.title2)
                                 .bold()
@@ -71,14 +73,14 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Memory Games")
                                 .font(.headline)
-                            
+
                             VStack(spacing: 12) {
                                 Label("Family Photo Gallery", systemImage: "photo")
                                     .padding()
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.gray.opacity(0.1))
                                     .cornerRadius(12)
-                                
+
                                 Label("Meet My Pet", systemImage: "pawprint")
                                     .padding()
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -120,40 +122,39 @@ struct HomeView: View {
                     }
                     .padding()
                 }
+
+                // Tab Bar (without Home)
+                TabView {
+                    ProfileView()
+                        .tabItem {
+                            Label("Profile", systemImage: "person.circle")
+                        }
+
+                    MemoryGamesView()
+                        .tabItem {
+                            Label("Games", systemImage: "gamecontroller")
+                        }
+
+                    HealthView()
+                        .tabItem {
+                            Label("Health", systemImage: "heart")
+                        }
+
+                    DailyPlannerView()
+                        .tabItem {
+                            Label("Planner", systemImage: "calendar")
+                        }
+
+                    SOSView()
+                        .tabItem {
+                            Label("SOS", systemImage: "exclamationmark.triangle")
+                        }
+                }
+                .frame(height: 50) // Optional: helps prevent ScrollView overlap
             }
-            .tabItem {
-                Label("Home", systemImage: "house")
-            }
-
-            // Other Tabs
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
-                }
-
-            MemoryGamesView()
-                .tabItem {
-                    Label("Games", systemImage: "gamecontroller")
-                }
-
-            HealthView()
-                .tabItem {
-                    Label("Health", systemImage: "heart")
-                }
-
-            DailyPlannerView()
-                .tabItem {
-                    Label("Planner", systemImage: "calendar")
-                }
-
-            SOSView()
-                .tabItem {
-                    Label("SOS", systemImage: "exclamationmark.triangle")
-                }
         }
     }
 }
-
 
 #Preview {
     HomeView()
