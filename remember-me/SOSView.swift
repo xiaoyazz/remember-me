@@ -5,6 +5,11 @@
 //  Created by Xiaoya Zou on 2025-03-29.
 //
 
+// SOS button for when they are confused
+// 911 at top
+// Family / people who are important
+// Personal information card 
+
 import SwiftUI
 
 struct SOSView: View {
