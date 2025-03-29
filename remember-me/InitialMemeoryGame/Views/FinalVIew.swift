@@ -1,5 +1,5 @@
 //
-//  FinalVIew.swift
+//  FinalView.swift
 //  remember-me
 //
 //  Created by Mathew Boyd on 2025-03-29.
@@ -29,7 +29,8 @@ struct FinalView: View {
 
 struct FinalView_Previews: PreviewProvider {
     static var previews: some View {
-        FinalView().environmentObject(MetricsLogger())
+        NavigationView {
+            FinalView().environmentObject(MetricsLogger())
+        }
     }
 }
-

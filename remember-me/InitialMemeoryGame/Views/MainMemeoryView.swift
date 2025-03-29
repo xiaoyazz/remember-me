@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct MainMemeoryView: View {
     @StateObject var metricsLogger = MetricsLogger()
     @State private var showRound1 = false
@@ -17,6 +16,7 @@ struct MainMemeoryView: View {
             Text("Welcome to Memory Quest!")
                 .font(.largeTitle)
                 .padding()
+
             Button(action: {
                 showRound1 = true
             }) {
@@ -28,8 +28,12 @@ struct MainMemeoryView: View {
                     .cornerRadius(10)
             }
         }
+        // Wrap Round1View inside a NavigationView (iOS 15 or below) or NavigationStack (iOS 16+)
         .fullScreenCover(isPresented: $showRound1) {
-                   Round1View().environmentObject(metricsLogger)
+             NavigationStack {
+                 Round1View().environmentObject(metricsLogger)
+             }
+             .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -37,4 +41,3 @@ struct MainMemeoryView: View {
 #Preview {
     MainMemeoryView()
 }
-

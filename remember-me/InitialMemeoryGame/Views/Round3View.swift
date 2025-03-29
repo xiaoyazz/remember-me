@@ -10,15 +10,13 @@ import SwiftUI
 struct Round3View: View {
     @EnvironmentObject var metricsLogger: MetricsLogger
     @State private var currentQuestionIndex = 0
+    @State private var finished = false
     
     // Use round3 questions from the Questions struct.
     let questions = Questions.round3
-    
+
     var body: some View {
         VStack {
-            Text("Round 3: Executive Function & Multi-Tasking")
-                .font(.title)
-                .padding()
             
             Text(questions[currentQuestionIndex].text)
                 .padding()
@@ -27,8 +25,11 @@ struct Round3View: View {
                 Button(action: {
                     let logMessage = "Round3 Q\(currentQuestionIndex+1): Selected: \(option)"
                     metricsLogger.log(logMessage)
+                    
                     if currentQuestionIndex < questions.count - 1 {
                         currentQuestionIndex += 1
+                    } else {
+                        finished = true
                     }
                 }) {
                     Text(option)
@@ -39,14 +40,27 @@ struct Round3View: View {
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        CustomTitleView(title: "Round 2: Cognitive Ability")
+                    }
+                }
+            }
+        
+            
+            NavigationLink(destination: FinalView().environmentObject(metricsLogger),
+                           isActive: $finished) {
+                EmptyView()
             }
         }
-        .navigationTitle("Round 3")
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct Round3View_Previews: PreviewProvider {
     static var previews: some View {
-        Round3View().environmentObject(MetricsLogger())
+        NavigationView {
+            Round3View().environmentObject(MetricsLogger())
+        }
     }
 }
