@@ -18,6 +18,7 @@ struct SignUpView: View {
     
     var body: some View {
         
+        // test by xiaoya
         
         VStack(spacing: 20) {
             

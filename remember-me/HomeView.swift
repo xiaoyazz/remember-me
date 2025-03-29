@@ -30,18 +30,18 @@ struct HomeView: View {
     ]
 
     var body: some View {
+
         NavigationStack {
             VStack(spacing: 0) {
                 // Scrollable Home Content
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Home")
                                 .font(.largeTitle)
                                 .bold()
-
+                          
                             Text("Good morning!")
                                 .font(.title2)
                                 .bold()
