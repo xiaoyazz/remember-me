@@ -27,7 +27,7 @@ struct GameStats {
     var round2AudioReplays: Int = 0
     
     //Age of the user
-    var userAge: Int = 0
+    var userAge: Int = 50
     
 
     

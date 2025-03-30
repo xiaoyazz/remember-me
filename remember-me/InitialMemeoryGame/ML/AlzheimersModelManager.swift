@@ -49,9 +49,9 @@ class AlzheimersModelManager: ObservableObject {
             let output = try model.prediction(input: input)
             
             let labelMap = [
-                0: "alzheimers",
+                0: "no_alzheimers",
                 1: "maybe_alzheimers",
-                2: "no_alzheimers"
+                2: "You may have alzheimers"
             ]
             
             let predictedIndex = output.diagnosis_prediction
