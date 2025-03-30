@@ -34,7 +34,7 @@ struct HomeView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 // Scrollable Home Content
-                ScrollView {
+       
                     VStack(alignment: .leading, spacing: 20) {
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
@@ -45,7 +45,9 @@ struct HomeView: View {
                             Text("Good morning!")
                                 .font(.title2)
                                 .bold()
-                        }
+                        }.padding()
+                        
+                 
 
                         // Calendar Scroll
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -67,7 +69,8 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                        }
+                        }.padding()
+                        ScrollView {
 
                         // Memory Games
                         VStack(alignment: .leading, spacing: 12) {
@@ -123,34 +126,6 @@ struct HomeView: View {
                     .padding()
                 }
 
-                // Tab Bar (without Home)
-                TabView {
-                    ProfileView()
-                        .tabItem {
-                            Label("Profile", systemImage: "person.circle")
-                        }
-
-                    MemoryGamesView()
-                        .tabItem {
-                            Label("Games", systemImage: "gamecontroller")
-                        }
-
-                    HealthView()
-                        .tabItem {
-                            Label("Health", systemImage: "heart")
-                        }
-
-                    DailyPlannerView()
-                        .tabItem {
-                            Label("Planner", systemImage: "calendar")
-                        }
-
-                    SOSView()
-                        .tabItem {
-                            Label("SOS", systemImage: "exclamationmark.triangle")
-                        }
-                }
-                .frame(height: 50) // Optional: helps prevent ScrollView overlap
             }
         }
     }
