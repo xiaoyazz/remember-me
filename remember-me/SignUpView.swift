@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
+
 
 struct SignUpView: View {
     @State private var name = ""
@@ -14,6 +17,12 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var accountType = "Patient"
+    
+    @State private var showSuccessAlert = false
+
+    
+    @State private var errorMessage = ""
+    @Environment(\.dismiss) var dismiss
     
     let accountOptions = ["Patient", "Caregiver", "Healthcare Pro"]
     
@@ -52,23 +61,69 @@ struct SignUpView: View {
 
             SecureField("Confirm Password", text: $confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            Button(action: {
-                // Validate and submit signup
-            }) {
-                Text("Sign Up")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.accentColor)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
             }
+
+            Button("Sign Up") {
+                handleSignUp()
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.accentColor)
+            .foregroundColor(.white)
+            .cornerRadius(8)
 
             Spacer()
         }
         .padding()
         .navigationTitle("Sign Up")
         .navigationBarTitleDisplayMode(.inline)
+        
+        .alert("Success", isPresented: $showSuccessAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Your account was created successfully!")
+        }
+    }
+    
+    func handleSignUp() {
+        errorMessage = ""
+
+        guard !name.isEmpty, !age.isEmpty, !email.isEmpty, !password.isEmpty else {
+            errorMessage = "Please fill out all fields."
+            return
+        }
+
+        guard password == confirmPassword else {
+            errorMessage = "Passwords do not match."
+            return
+        }
+
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                self.errorMessage = error.localizedDescription
+                return
+            }
+
+            // ✅ Save extra user info to Firestore
+            let db = Firestore.firestore()
+            db.collection("users").document(result!.user.uid).setData([
+                "name": name,
+                "email": email,
+                "age": age,
+                "accountType": accountType
+            ]) { error in
+                if let error = error {
+                    self.errorMessage = "Failed to save user data: \(error.localizedDescription)"
+                } else {
+                    self.showSuccessAlert = true
+                }
+            }
+        }
+
     }
 }
 
