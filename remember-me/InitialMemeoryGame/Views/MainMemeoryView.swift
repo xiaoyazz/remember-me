@@ -4,11 +4,12 @@
 //
 //  Created by Mathew Boyd on 2025-03-29.
 
+
 import SwiftUI
 
 struct MainMemeoryView: View {
-    @StateObject var metricsLogger = MetricsLogger()
-    @StateObject var statsManager = GameStatsManager()
+    @EnvironmentObject var metricsLogger: MetricsLogger
+    @EnvironmentObject var statsManager: GameStatsManager
     @State private var showRound1 = false
 
     var body: some View {
@@ -31,8 +32,8 @@ struct MainMemeoryView: View {
         .fullScreenCover(isPresented: $showRound1) {
             NavigationStack {
                 Round1View()
+                    .environmentObject(statsManager)      
                     .environmentObject(metricsLogger)
-                    .environmentObject(statsManager)
             }
             .navigationBarBackButtonHidden(true)
         }
@@ -42,5 +43,9 @@ struct MainMemeoryView: View {
 struct MainMemeoryView_Previews: PreviewProvider {
     static var previews: some View {
         MainMemeoryView()
+            .environmentObject(GameStatsManager())
+            .environmentObject(MetricsLogger())
     }
 }
+
+

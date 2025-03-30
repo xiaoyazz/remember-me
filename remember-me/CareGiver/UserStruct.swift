@@ -10,7 +10,7 @@ import Foundation
 struct User: Identifiable {
     let id = UUID()
     let name: String
-    let age: String
+    let age: Int
     let email: String
     let accountType: String
 }

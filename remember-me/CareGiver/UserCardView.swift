@@ -57,7 +57,7 @@ struct UserCardView: View {
     StatefulPreviewWrapper(true) { isFollowing in
         UserCardView(user: User(
             name: "Mathew Boyd",
-            age: "28",
+            age: 28,
             email: "mathew@example.com",
             accountType: "Patient"
         ), isFollowing: isFollowing)

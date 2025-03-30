@@ -10,12 +10,10 @@ import SwiftUI
 struct FinalView: View {
     @EnvironmentObject var statsManager: GameStatsManager
     @EnvironmentObject var metricsLogger: MetricsLogger
-    
-    // Create or store a model manager
+
     @StateObject private var modelManager = AlzheimersModelManager()
-    
-    // Store the prediction label (e.g. "no_alzheimers")
     @State private var predictedDiagnosis: String? = nil
+    @State private var goHome = false
 
     var body: some View {
         ScrollView {
@@ -56,13 +54,12 @@ struct FinalView: View {
 
                 Divider()
 
-                Text(" All answers were logged and your performance has been recorded.")
+                Text("All answers were logged and your performance has been recorded.")
                     .padding(.top)
                     .bold()
 
-         
                 if let diagnosis = predictedDiagnosis {
-                    Text(" Predicted Diagnosis: \(diagnosis.capitalized)")
+                    Text("Predicted Diagnosis: \(diagnosis.capitalized)")
                         .font(.title2)
                         .foregroundColor(.blue)
                         .padding(.top)
@@ -91,14 +88,33 @@ struct FinalView: View {
                 }
 
                 Spacer()
+
+                Button(action: {
+                    goHome = true
+                }) {
+                    Text("Take Me Home")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.top, 30)
+                }
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
-            let featureVector = statsManager.featureVector()
-            print("Feature Vector: \(featureVector)")
+            let vectorForModel = statsManager.featureVector()
+            let orderedVector = statsManager.featureVectorArray()
 
-            predictedDiagnosis = modelManager.predictDiagnosis(featureDict: featureVector)
+            print("Feature Vector (dict for model): \(vectorForModel)")
+            print("Ordered Feature Vector (array for debug): \(orderedVector)")
+
+            predictedDiagnosis = modelManager.predictDiagnosis(featureDict: vectorForModel)
+        }
+        .fullScreenCover(isPresented: $goHome) {
+            MainTabView()
         }
     }
 }

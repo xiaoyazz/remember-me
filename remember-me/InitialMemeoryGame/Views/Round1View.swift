@@ -16,13 +16,14 @@ struct Round1View: View {
     @State private var questionStartTime = Date()
     @State private var elapsedTime: TimeInterval? = nil
     @State private var roundStartTime = Date()
-    @State private var showEnlargedImage = false  // New state to control the enlarged photo
+    @State private var showEnlargedImage = false  // Controls enlarged photo
     
     let questions = Questions.round1
 
     var body: some View {
         VStack {
-            // Display the image from assets if available, otherwise show a placeholder.
+            
+            // Display the image if available; otherwise, show a placeholder.
             if let pictureName = questions[currentQuestionIndex].picture, !pictureName.isEmpty {
                 ZStack(alignment: .topTrailing) {
                     Image(pictureName)
@@ -101,7 +102,9 @@ struct Round1View: View {
             }
             
             NavigationLink(
-                destination: Round2View().environmentObject(statsManager).environmentObject(metricsLogger),
+                destination: Round2View()
+                    .environmentObject(statsManager)
+                    .environmentObject(metricsLogger),
                 isActive: $finished
             ) {
                 EmptyView()

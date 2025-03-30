@@ -11,28 +11,25 @@ import FirebaseFirestore
 
 struct LoginView: View {
     @Binding var isLoggedIn: Bool
-    
+
     @State private var email = ""
     @State private var password = ""
-    
-    // Which main view to show
-    @State private var showMainTabView = false
+
+    @State private var showMainMemoryView = false
     @State private var showCaregiverMainTabView = false
-    
-    // UI feedback
+
     @State private var loginError: String?
     @State private var isLoading = false
+
+    @StateObject private var statsManager = GameStatsManager()
+    @StateObject private var metricsLogger = MetricsLogger()
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                
                 Text("Welcome to Remember Me!")
                     .font(.largeTitle)
                     .bold()
-                
-                // No more segmented picker
-                // The user's accountType is determined from Firestore after login
 
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -49,9 +46,7 @@ struct LoginView: View {
                         .font(.footnote)
                 }
 
-                Button(action: {
-                    loginUser()
-                }) {
+                Button(action: loginUser) {
                     if isLoading {
                         ProgressView()
                             .tint(.white)
@@ -68,7 +63,6 @@ struct LoginView: View {
                 .cornerRadius(8)
                 .disabled(isLoading)
 
-                // Sign Up link
                 NavigationLink(destination: SignUpView()) {
                     Text("Don't have an account? ")
                         .font(.footnote)
@@ -81,70 +75,67 @@ struct LoginView: View {
             }
             .padding()
         }
-        // If showMainTabView is true, present that fullscreen
-        .fullScreenCover(isPresented: $showMainTabView) {
-            MainTabView()
-                .navigationBarBackButtonHidden(true)
-        }
-        // If showCaregiverMainTabView is true, present that fullscreen
-        .fullScreenCover(isPresented: $showCaregiverMainTabView) {
-            CareGiverMainTabView()
+        .fullScreenCover(isPresented: $showMainMemoryView) {
+            MainMemeoryView()
+                .environmentObject(statsManager)
+                .environmentObject(metricsLogger)
                 .navigationBarBackButtonHidden(true)
         }
     }
 
-    // MARK: - Firebase Login Logic
     private func loginUser() {
-        // Reset old error
         loginError = nil
         isLoading = true
 
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             DispatchQueue.main.async {
-                self.isLoading = false
+                isLoading = false
             }
 
             if let error = error {
                 DispatchQueue.main.async {
-                    self.loginError = error.localizedDescription
+                    loginError = error.localizedDescription
                 }
                 return
             }
 
-            // If login successful, fetch user doc to see if they're a caregiver or not
             guard let uid = Auth.auth().currentUser?.uid else { return }
-            
+
             let db = Firestore.firestore()
             db.collection("users").document(uid).getDocument { docSnap, error in
                 if let error = error {
                     DispatchQueue.main.async {
-                        self.loginError = "Error fetching user type: \(error.localizedDescription)"
+                        loginError = "Error fetching user type: \(error.localizedDescription)"
                     }
                     return
                 }
-                
+
                 guard let data = docSnap?.data() else {
                     DispatchQueue.main.async {
-                        self.loginError = "User record not found in Firestore."
+                        loginError = "User record not found."
                     }
                     return
                 }
-                
-                // Read the 'accountType' field
+
+
+                let userAge = data["age"] as? Int ?? 0
                 let accountType = data["accountType"] as? String ?? "Patient"
-                
+
                 DispatchQueue.main.async {
-                    self.isLoggedIn = true
+                    statsManager.stats.userAge = userAge
+                    print("User Age from Firestore: \(userAge)")
+                    isLoggedIn = true
                     if accountType == "Caregiver" {
-                        self.showCaregiverMainTabView = true
+                        showCaregiverMainTabView = true
                     } else {
-                        self.showMainTabView = true
+                        showMainMemoryView = true
                     }
                 }
             }
         }
     }
 }
+
 
 #Preview {
     LoginView(isLoggedIn: .constant(false))

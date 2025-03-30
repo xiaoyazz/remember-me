@@ -36,7 +36,7 @@ class FirebaseUserDirectoryViewModel: ObservableObject {
                 
                 // Grab fields you expect
                 guard let name = data["name"] as? String,
-                      let age = data["age"] as? String,
+                      let age = data["age"] as? Int,
                       let email = data["email"] as? String,
                       let accountType = data["accountType"] as? String
                 else {
@@ -62,6 +62,28 @@ class FirebaseUserDirectoryViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchUserAgeFromFirestore(userId: String, completion: @escaping (Int?) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Replace "users" with your actual collection name
+        db.collection("users").document(userId).getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetching user document: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = snapshot?.data(),
+                  let userAge = data["age"] as? Int else {
+                completion(nil)
+                return
+            }
+            
+            completion(userAge)
+        }
+    }
+
     
     /// Toggle local isFollowing AND persist changes in Firestore
     func toggleFollow(for docId: String) {
