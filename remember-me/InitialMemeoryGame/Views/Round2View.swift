@@ -27,59 +27,75 @@ struct Round2View: View {
     private func speakQuestion() {
         let utterance = AVSpeechUtterance(string: questions[currentQuestionIndex].text)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        audioFinished = false  // Hide answer options until speech finishes.
+        audioFinished = false
         synthesizer.speak(utterance)
     }
 
     var body: some View {
         VStack {
-            // If the question should be spoken, center the audio UI.
-            if questions[currentQuestionIndex].shouldBeSpoken {
-                VStack {
-                    Spacer()
-                    Button("Replay Audio") {
-                        speakQuestion()
-                        // (Optional) Update any replay counter here.
-                    }
-                    .padding()
-                    .background(Color.orange.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                    .frame(maxWidth: .infinity)
-                    Spacer()
-                }
-                .onAppear {
-                    synthesizer.delegate = audioDelegate
-                    audioDelegate.onFinish = {
-                        DispatchQueue.main.async {
-                            self.audioFinished = true
+            Group {
+                if questions[currentQuestionIndex].shouldBeSpoken {
+                    // Center the audio UI with fade transition.
+                    VStack {
+                        Spacer()
+                        Button("Replay Audio") {
+                            synthesizer.stopSpeaking(at: .immediate)
+                            synthesizer.delegate = audioDelegate
+                            audioDelegate.onFinish = {
+                                DispatchQueue.main.async {
+                                    withAnimation(.easeInOut) {
+                                        self.audioFinished = true
+                                    }
+                                }
+                            }
+                            speakQuestion()
+                            statsManager.stats.round2AudioReplays += 1
                         }
+                        .padding()
+                        // Change the background based on audioFinished state.
+                        .background(audioFinished ? Color.orange.opacity(0.8) : Color.gray.opacity(0.5))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .disabled(!audioFinished)
+                        Spacer()
                     }
-                    speakQuestion()
+                    .transition(.opacity)
+                    .onAppear {
+                        synthesizer.delegate = audioDelegate
+                        audioDelegate.onFinish = {
+                            DispatchQueue.main.async {
+                                withAnimation(.easeInOut) {
+                                    self.audioFinished = true
+                                }
+                            }
+                        }
+                        speakQuestion()
+                    }
+                    .transition(.opacity)
+                } else {
+                    // Display the question text normally with fade transition.
+                    Text(questions[currentQuestionIndex].text)
+                        .font(.title2)
+                        .padding()
+                        .transition(.opacity)
                 }
-            } else {
-                // Otherwise, display the question text normally.
-                Text(questions[currentQuestionIndex].text)
-                    .font(.title2)
-                    .padding()
             }
-            
+            .animation(.easeInOut, value: currentQuestionIndex)
+
             if let elapsed = elapsedTime {
                 Text(String(format: "Time to answer: %.2f seconds", elapsed))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.bottom)
+                    .transition(.opacity)
             }
-            
-            // Only show answer options if either the question is not spoken
-            // or the audio has finished.
+
+            // Only show answer options if the question is not spoken or audio has finished.
             if !questions[currentQuestionIndex].shouldBeSpoken || audioFinished {
                 ForEach(questions[currentQuestionIndex].options.indices, id: \.self) { index in
                     let option = questions[currentQuestionIndex].options[index]
                     Button(action: {
-                        // Immediately stop any audio.
                         synthesizer.stopSpeaking(at: .immediate)
-                        
                         let elapsed = Date().timeIntervalSince(questionStartTime)
                         elapsedTime = elapsed
 
@@ -92,13 +108,15 @@ struct Round2View: View {
                         }
                         statsManager.stats.round2ResponseTimes.append(elapsed)
 
-                        if currentQuestionIndex < questions.count - 1 {
-                            currentQuestionIndex += 1
-                            questionStartTime = Date()
-                            elapsedTime = nil
-                        } else {
-                            statsManager.stats.round2TotalTime = Date().timeIntervalSince(roundStartTime)
-                            finished = true
+                        withAnimation(.easeInOut) {
+                            if currentQuestionIndex < questions.count - 1 {
+                                currentQuestionIndex += 1
+                                questionStartTime = Date()
+                                elapsedTime = nil
+                            } else {
+                                statsManager.stats.round2TotalTime = Date().timeIntervalSince(roundStartTime)
+                                finished = true
+                            }
                         }
                     }) {
                         Text(option)
@@ -109,6 +127,7 @@ struct Round2View: View {
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
+                    .transition(.opacity)
                 }
             }
             
@@ -138,6 +157,5 @@ struct Round2View_Previews: PreviewProvider {
     }
 }
 
-
 //Note to Mathew: Disabled System messages due to them be overcrowed with messages from including voice (It is normal but here is how I did if i need to renable the system messages in the future
-// Menu Bar -> Product -> Scheme -> Edit Scheme -> Enviroment Virables -> Uncheck "OS_ACTIVITY_MODE" 
+// Menu Bar -> Product -> Scheme -> Edit Scheme -> Enviroment Virables -> Uncheck "OS_ACTIVITY_MODE"

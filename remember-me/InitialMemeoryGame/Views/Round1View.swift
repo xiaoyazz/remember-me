@@ -27,10 +27,8 @@ struct Round1View: View {
                 ZStack(alignment: .topTrailing) {
                     Image(pictureName)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
                         .frame(height: 260)
                         .frame(width: 400)
-                        .clipped()
                         .padding()
                     Button(action: {
                         showEnlargedImage = true

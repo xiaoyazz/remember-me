@@ -25,6 +25,8 @@ class GameStatsManager: ObservableObject {
             features["round1TotalTime"] = stats.round1TotalTime
             features["round2TotalTime"] = stats.round2TotalTime
             features["round3TotalTime"] = stats.round3TotalTime
+        
+            features["round2AudioReplays"] = Double(stats.round2AudioReplays)
             
 
             let totalCorrect = stats.round1Correct + stats.round2Correct + stats.round3Correct
