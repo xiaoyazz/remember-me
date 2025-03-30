@@ -12,15 +12,13 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var accountType = "Patient"
+    @State private var showMainTabView = false
+
     let accountOptions = ["Patient", "Caregiver", "Healthcare Pro"]
 
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             VStack(spacing: 20) {
-                
-//                Text("Please select your role:")
-//                    .font(.headline)
-//                    .foregroundColor(.gray)
                 
                 Picker("Account Type", selection: $accountType) {
                     ForEach(accountOptions, id: \.self) {
@@ -28,16 +26,17 @@ struct LoginView: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                
+
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 Button(action: {
-                    // Handle firebase auth later
+                    // Handle auth logic here
                     isLoggedIn = true
+                    showMainTabView = true
                 }) {
                     Text("Log In")
                         .frame(maxWidth: .infinity)
@@ -47,7 +46,6 @@ struct LoginView: View {
                         .cornerRadius(8)
                 }
 
-                
                 NavigationLink(destination: SignUpView()) {
                     Text("Don't have an account? ")
                         .font(.footnote)
@@ -57,10 +55,12 @@ struct LoginView: View {
                         .foregroundColor(.blue)
                         .underline()
                 }
-
-
             }
             .padding()
+        }
+        .fullScreenCover(isPresented: $showMainTabView) {
+            MainTabView()
+                .navigationBarBackButtonHidden(true)
         }
     }
 }

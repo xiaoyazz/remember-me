@@ -30,18 +30,19 @@ struct HomeView: View {
     ]
 
     var body: some View {
+
         NavigationStack {
             VStack(spacing: 0) {
                 // Scrollable Home Content
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        
                         // Header
+
                         HStack {
                             Text("Good morning!")
                                 .font(.title)
                                 .bold()
-
+                          
                             Spacer()
 
                             Image("user") // Ensure this matches the asset name
@@ -50,6 +51,7 @@ struct HomeView: View {
                                 .frame(width: 100, height: 100)
                                 .clipShape(Circle())
                         }
+               
 
                         // Calendar Scroll
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -135,6 +137,7 @@ struct HomeView: View {
 //                        }
 //                }
 //                .frame(height: 50) // Optional: helps prevent ScrollView overlap
+
             }
         }
     }
