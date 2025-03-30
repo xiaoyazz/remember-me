@@ -3,13 +3,12 @@
 //  remember-me
 //
 //  Created by Mathew Boyd on 2025-03-29.
-//
 
 import SwiftUI
 
 struct MainMemeoryView: View {
     @StateObject var metricsLogger = MetricsLogger()
-    @StateObject var statsManager = GameStatsManager()  
+    @StateObject var statsManager = GameStatsManager()
     @State private var showRound1 = false
 
     var body: some View {

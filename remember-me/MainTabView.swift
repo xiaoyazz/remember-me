@@ -15,24 +15,20 @@ struct MainTabView: View {
                     Label("Home", systemImage: "house")
                 }
 
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
-                }
-
+            
             MemoryGamesView()
                 .tabItem {
                     Label("Games", systemImage: "gamecontroller")
+                }
+            
+            DailyPlannerView()
+                .tabItem {
+                    Label("Planner", systemImage: "plus.circle")
                 }
 
             HealthView()
                 .tabItem {
                     Label("Health", systemImage: "heart")
-                }
-
-            DailyPlannerView()
-                .tabItem {
-                    Label("Planner", systemImage: "calendar")
                 }
 
             SOSView()
