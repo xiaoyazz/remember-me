@@ -30,7 +30,7 @@ struct Questions {
         Question(text: "How many types of animals are at the Farm?", options: ["8", "10", "6", "11"], answer: 1, picture: "FarmAnimals"),
         Question(text: "What type of classroom is shown?", options: ["Modern", "Traditional", "Outdoor", "Virtual"], answer: 2, picture: "ClassroomOutdoor"),
         Question(text: "How many trees are visible in the park?", options: ["4", "2", "1", "5"], answer: 1, picture: "ParkTrees"),
-        Question(text: "How many cars are currely parked", options: ["2", "7", "6", "5"], answer: 3, picture: "Cars"),
+        Question(text: "How many cars are currently parked", options: ["2", "7", "6", "5"], answer: 3, picture: "Cars"),
         Question(text: "How many flowers do you see in the garden?", options: ["10", "15", "12", "13"], answer: 1, picture: "Flowers"),
         Question(text: "How many benches are in the schoolyard?", options: ["1", "2", "3", "4"], answer: 2, picture: "Benches"),
         Question(text: "What are the main colors of the buildings in the picture? (Match the closet colors to the ones in the picture)", options: ["Red", "Blue", "Green", "Yellow"], answer: 1, picture: "Building")
@@ -59,7 +59,7 @@ struct Questions {
         Question(text: "Pattern Recognition: Complete the series: 3, 6, 12, 24, ?", options: ["48", "36", "30", "42"], answer: 0),
         Question(text: "Working Memory: Mathew tells you a sequence: 10, 20, 30. Select the correct order.", options: ["10,20,30", "20,30,10", "30,20,10", "10,30,20"], answer: 0),
         Question(text: "Logical Puzzle: If Sara is older than Mia and Mia is older than Zoe, who is the youngest?", options: ["Sara", "Mia", "Zoe", "Cannot determine"], answer: 2),
-        Question(text: "Narrative Recall: How were the sudents feeling in the picture of the classroom of students", options: ["Happy", "Sad", "Angry" , "Suprised"], answer: 0),
+        Question(text: "Narrative Recall: How were the students feeling in the picture of the classroom of students", options: ["Happy", "Sad", "Angry" , "Suprised"], answer: 0),
         Question(text: "Working Memory: Mathew tells you a sequence: 2, 9, 4, 6, 9, 10. Select the correct order.", options: ["2,9,4,6,9,10", "2,4,9,6,10, 9", "4,2,6,9,10,9", "9,2,4,6,10,9", "2,6,9,4,9 10"], answer: 0),
     ]
     
@@ -70,7 +70,6 @@ struct Questions {
         Question(text: "Distraction: What color was the benches in the photo of the schoolyard", options: ["Red", "Brown", "Green", "Yellow"], answer: 1),
         Question(text: "Math: Solve 7 + 6", options: ["12", "13", "14", "15"], answer: 1),
         Question(text: "Complex Planning: What is the best order for Meeting, Coffee, Work?", options: ["Meeting, Coffee, Work", "Coffee, Meeting, Work", "Work, Meeting, Coffee", "Meeting, Work, Coffee"], answer: 0),
-        Question(text: "Distraction: Which icon appeared last on the screen?", options: ["Star", "Heart", "Moon", "Sun"], answer: 2),
         Question(text: "Math: Solve 9 - 4", options: ["4", "5", "6", "7"], answer: 1),
         Question(text: "Complex Planning: Choose the best order for Laundry, Dinner, Exercise.", options: ["Laundry, Exercise, Dinner", "Dinner, Laundry, Exercise", "Exercise, Laundry, Dinner", "Laundry, Dinner, Exercise"], answer: 3)
     ]
