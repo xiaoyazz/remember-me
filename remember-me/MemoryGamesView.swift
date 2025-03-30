@@ -12,7 +12,7 @@ struct MemoryGamesView: View {
         NavigationStack {
             List {
                 Section(header: Text("Family & Pets")) {
-                    NavigationLink(destination: Text("Comming soon...")) {
+                    NavigationLink(destination: FacesILoveView()) {
                         Label("Faces I Love", systemImage: "photo")
                     }
                     
