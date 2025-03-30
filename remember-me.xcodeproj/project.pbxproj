@@ -12,6 +12,7 @@
 		B2ABD3622D990DEC00A91590 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3612D990DEC00A91590 /* FirebaseCore */; };
 		B2ABD3642D990DEC00A91590 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3632D990DEC00A91590 /* FirebaseDatabase */; };
 		B2ABD3662D990DEC00A91590 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3652D990DEC00A91590 /* FirebaseFirestore */; };
+
 		B2ABD3D02D99325800A91590 /* RememberMeWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2ABD3D72D9932F200A91590 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ABD3D62D9932F200A91590 /* WatchConnectivity.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,9 @@
 		};
 /* End PBXCopyFilesBuildPhase section */
 
+=======
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B275D7D92D97A4180024AD81 /* remember-me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remember-me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RememberMeWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,12 +68,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				B2ABD3D72D9932F200A91590 /* WatchConnectivity.framework in Frameworks */,
+
 				B2ABD22D2D9909FC00A91590 /* FirebaseAnalytics in Frameworks */,
 				B2ABD3622D990DEC00A91590 /* FirebaseCore in Frameworks */,
 				B2ABD3642D990DEC00A91590 /* FirebaseDatabase in Frameworks */,
 				B2ABD3662D990DEC00A91590 /* FirebaseFirestore in Frameworks */,
 				B2ABD3602D990DEC00A91590 /* FirebaseAuth in Frameworks */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
