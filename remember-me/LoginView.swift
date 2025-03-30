@@ -81,6 +81,11 @@ struct LoginView: View {
                 .environmentObject(metricsLogger)
                 .navigationBarBackButtonHidden(true)
         }
+        .fullScreenCover(isPresented: $showCaregiverMainTabView) {
+            CareGiverMainTabView()
+                .navigationBarBackButtonHidden(true)
+        }
+
     }
 
     private func loginUser() {

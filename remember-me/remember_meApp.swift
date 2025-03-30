@@ -26,8 +26,8 @@ struct remember_meApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //SplashView(isLoggedIn: $isLoggedIn)
-            MainMemeoryView()
+            SplashView(isLoggedIn: $isLoggedIn)
+            //suMainMemeoryView()
         }
     }
 }
