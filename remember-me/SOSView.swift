@@ -68,7 +68,7 @@ struct SOSView: View {
                         .font(.headline)
 
                     Map(coordinateRegion: $region)
-                        .frame(height: 200)
+                        .frame(height: 150)
                         .cornerRadius(12)
                 }
 

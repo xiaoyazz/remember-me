@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct CareGiverMainTabView: View {
+    @StateObject private var viewModel = FirebaseUserDirectoryViewModel()
+    
     var body: some View {
         TabView {
-            UserListView()
+            UserListView(viewModel: viewModel)
                 .tabItem {
-                    Label("Paicents", systemImage: "person.crop.circle")
+                    Label("Patients", systemImage: "person.crop.circle")
                 }
-            //Add Later
-//            FollowingListView()
-//                .tabItem {
-//                    Label("Following", systemImage: "person.3")
-//                }
+
+            FollowingUserListView(viewModel: viewModel)
+                .tabItem {
+                    Label("Following", systemImage: "person.3")
+                }
         }
     }
 }

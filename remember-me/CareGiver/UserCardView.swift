@@ -28,7 +28,7 @@ struct UserCardView: View {
 
                 Button(action: {
                     withAnimation {
-                        isFollowing.toggle()
+                        isFollowing.toggle()  // We rely on a custom Binding from the parent
                     }
                 }) {
                     HStack {
@@ -52,11 +52,12 @@ struct UserCardView: View {
 }
 
 
+
 #Preview {
     StatefulPreviewWrapper(true) { isFollowing in
         UserCardView(user: User(
             name: "Mathew Boyd",
-            age: "28",
+            age: 28,
             email: "mathew@example.com",
             accountType: "Patient"
         ), isFollowing: isFollowing)

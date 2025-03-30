@@ -10,39 +10,45 @@
 import SwiftUI
 
 struct DailyPlannerView: View {
-    @State private var tasks: [PlannerTask] = []
-    @State private var newTaskTime: String = ""
-    @State private var newTaskDescription: String = ""
-
+    @State private var showAddTaskSheet = false
+    @State private var tasks: [PlannerTask] = [
+        PlannerTask(
+            id: UUID().uuidString,
+            date: "2025-03-29",
+            time: "9:00 AM",
+            description: "Take morning medication",
+            note: "Daily blood pressure pill",
+            category: "Health"
+        ),
+        PlannerTask(
+            id: UUID().uuidString,
+            date: "2025-03-29",
+            time: "11:00 AM",
+            description: "Call Doctor’s office",
+            note: "Confirm appointment",
+            category: "Health"
+        ),
+        PlannerTask(
+            id: UUID().uuidString,
+            date: "2025-03-29",
+            time: "4:00 PM",
+            description: "Walk around the block",
+            note: "30 min walk",
+            category: "Exercise"
+        )
+    ]
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 24) {
 
-                // Section: Add New Task
+                // Section: Add New Task (just opens sheet now)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Add New Task")
                         .font(.headline)
 
-                    TextField("Time (e.g. 9:00 AM)", text: $newTaskTime)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    TextField("Task Description", text: $newTaskDescription)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    Button("Add Task") {
-                        if !newTaskTime.isEmpty && !newTaskDescription.isEmpty {
-                            let newTask = PlannerTask(
-                                id: UUID().uuidString,
-                                date: formattedDate(),
-                                time: newTaskTime,
-                                description: newTaskDescription,
-                                note: nil,
-                                category: nil
-                            )
-                            tasks.append(newTask)
-                            newTaskTime = ""
-                            newTaskDescription = ""
-                        }
+                    Button("Open Add Task Sheet") {
+                        showAddTaskSheet = true
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -79,14 +85,13 @@ struct DailyPlannerView: View {
             .padding()
             .navigationTitle("Daily Planner")
         }
-    }
-
-    private func formattedDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: Date())
+        .sheet(isPresented: $showAddTaskSheet) {
+            AddTaskView(tasks: $tasks)
+        }
     }
 }
+
+
 
 #Preview {
     DailyPlannerView()
