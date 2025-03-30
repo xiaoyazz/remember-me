@@ -12,16 +12,53 @@
 		B2ABD3622D990DEC00A91590 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3612D990DEC00A91590 /* FirebaseCore */; };
 		B2ABD3642D990DEC00A91590 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3632D990DEC00A91590 /* FirebaseDatabase */; };
 		B2ABD3662D990DEC00A91590 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B2ABD3652D990DEC00A91590 /* FirebaseFirestore */; };
+
+		B2ABD3D02D99325800A91590 /* RememberMeWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2ABD3D72D9932F200A91590 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ABD3D62D9932F200A91590 /* WatchConnectivity.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2ABD3CE2D99325800A91590 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B275D7D12D97A4180024AD81 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2ABD3C22D99325600A91590;
+			remoteInfo = "RememberMeWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2ABD3D42D99325800A91590 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B2ABD3D02D99325800A91590 /* RememberMeWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+=======
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B275D7D92D97A4180024AD81 /* remember-me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remember-me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RememberMeWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2ABD3D62D9932F200A91590 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B275D7DB2D97A4180024AD81 /* remember-me */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "remember-me";
+			sourceTree = "<group>";
+		};
+		B2ABD3C42D99325600A91590 /* RememberMeWatch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "RememberMeWatch Watch App";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -31,11 +68,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+				B2ABD3D72D9932F200A91590 /* WatchConnectivity.framework in Frameworks */,
+
 				B2ABD22D2D9909FC00A91590 /* FirebaseAnalytics in Frameworks */,
 				B2ABD3622D990DEC00A91590 /* FirebaseCore in Frameworks */,
 				B2ABD3642D990DEC00A91590 /* FirebaseDatabase in Frameworks */,
 				B2ABD3662D990DEC00A91590 /* FirebaseFirestore in Frameworks */,
 				B2ABD3602D990DEC00A91590 /* FirebaseAuth in Frameworks */,
+
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2ABD3C02D99325600A91590 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				B275D7DB2D97A4180024AD81 /* remember-me */,
+				B2ABD3C42D99325600A91590 /* RememberMeWatch Watch App */,
+				B2ABD3D52D9932F200A91590 /* Frameworks */,
 				B275D7DA2D97A4180024AD81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +106,17 @@
 			isa = PBXGroup;
 			children = (
 				B275D7D92D97A4180024AD81 /* remember-me.app */,
+				B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B2ABD3D52D9932F200A91590 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2ABD3D62D9932F200A91590 /* WatchConnectivity.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,10 +129,12 @@
 				B275D7D52D97A4180024AD81 /* Sources */,
 				B275D7D62D97A4180024AD81 /* Frameworks */,
 				B275D7D72D97A4180024AD81 /* Resources */,
+				B2ABD3D42D99325800A91590 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B2ABD3CF2D99325800A91590 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B275D7DB2D97A4180024AD81 /* remember-me */,
@@ -88,6 +151,28 @@
 			productReference = B275D7D92D97A4180024AD81 /* remember-me.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B2ABD3C22D99325600A91590 /* RememberMeWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2ABD3D12D99325800A91590 /* Build configuration list for PBXNativeTarget "RememberMeWatch Watch App" */;
+			buildPhases = (
+				B2ABD3BF2D99325600A91590 /* Sources */,
+				B2ABD3C02D99325600A91590 /* Frameworks */,
+				B2ABD3C12D99325600A91590 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B2ABD3C42D99325600A91590 /* RememberMeWatch Watch App */,
+			);
+			name = "RememberMeWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "RememberMeWatch Watch App";
+			productReference = B2ABD3C32D99325600A91590 /* RememberMeWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -99,6 +184,9 @@
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					B275D7D82D97A4180024AD81 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					B2ABD3C22D99325600A91590 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
@@ -121,12 +209,20 @@
 			projectRoot = "";
 			targets = (
 				B275D7D82D97A4180024AD81 /* remember-me */,
+				B2ABD3C22D99325600A91590 /* RememberMeWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B275D7D72D97A4180024AD81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2ABD3C12D99325600A91590 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,7 +239,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2ABD3BF2D99325600A91590 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2ABD3CF2D99325800A91590 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2ABD3C22D99325600A91590 /* RememberMeWatch Watch App */;
+			targetProxy = B2ABD3CE2D99325800A91590 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B275D7E52D97A41A0024AD81 /* Debug */ = {
@@ -323,6 +434,66 @@
 			};
 			name = Release;
 		};
+		B2ABD3D22D99325800A91590 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RememberMeWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = F56FBGAYRM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RememberMeWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.xiaoya.remember-me";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xiaoya.remember-me.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		B2ABD3D32D99325800A91590 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RememberMeWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = F56FBGAYRM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RememberMeWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.xiaoya.remember-me";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xiaoya.remember-me.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -340,6 +511,15 @@
 			buildConfigurations = (
 				B275D7E82D97A41A0024AD81 /* Debug */,
 				B275D7E92D97A41A0024AD81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2ABD3D12D99325800A91590 /* Build configuration list for PBXNativeTarget "RememberMeWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2ABD3D22D99325800A91590 /* Debug */,
+				B2ABD3D32D99325800A91590 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
