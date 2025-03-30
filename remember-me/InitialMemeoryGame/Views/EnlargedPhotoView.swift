@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct EnlargedPhotoView: View {
+    let imageName: String
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .topTrailing) {
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .ignoresSafeArea() // cover full screen
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .padding()
+            }
+        }
     }
 }
 
-#Preview {
-    EnlargedPhotoView()
+struct EnlargedPhotoView_Previews: PreviewProvider {
+    static var previews: some View {
+        EnlargedPhotoView(imageName: "ZooAnimals")
+    }
 }
+

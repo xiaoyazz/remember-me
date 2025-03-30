@@ -27,7 +27,7 @@ struct Questions {
     static let round1: [Question] = [
         Question(text: "How many animals do you see in this Zoo?", options: ["3", "12", "7", "9"], answer: 1, picture: "ZooAnimals"),
         Question(text: "How many students are in this Classroom?", options: ["10", "15", "9", "25"], answer: 2, picture: "ClassRoomStudents"),
-        Question(text: "How many types of animals are at the Farm?", options: ["2", "8", "4", "5"], answer: 1, picture: "FarmAnimals"),
+        Question(text: "How many types of animals are at the Farm?", options: ["8", "10", "6", "11"], answer: 1, picture: "FarmAnimals"),
         Question(text: "What type of classroom is shown?", options: ["Modern", "Traditional", "Outdoor", "Virtual"], answer: 2, picture: "ClassroomOutdoor"),
         Question(text: "How many trees are visible in the park?", options: ["4", "2", "1", "5"], answer: 1, picture: "ParkTrees"),
         Question(text: "How many cars are currely parked", options: ["2", "7", "6", "5"], answer: 3, picture: "Cars"),

@@ -10,22 +10,9 @@
 		B275D7D92D97A4180024AD81 /* remember-me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remember-me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E72ED5D42D988C5700601A8E /* Exceptions for "remember-me" folder in "remember-me" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				StartingMemoryGame.swift,
-			);
-			target = B275D7D82D97A4180024AD81 /* remember-me */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B275D7DB2D97A4180024AD81 /* remember-me */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E72ED5D42D988C5700601A8E /* Exceptions for "remember-me" folder in "remember-me" target */,
-			);
 			path = "remember-me";
 			sourceTree = "<group>";
 		};

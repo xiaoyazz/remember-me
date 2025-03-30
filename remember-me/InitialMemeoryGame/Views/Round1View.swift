@@ -16,6 +16,7 @@ struct Round1View: View {
     @State private var questionStartTime = Date()
     @State private var elapsedTime: TimeInterval? = nil
     @State private var roundStartTime = Date()
+    @State private var showEnlargedImage = false  // New state to control the enlarged photo
     
     let questions = Questions.round1
 
@@ -23,12 +24,28 @@ struct Round1View: View {
         VStack {
             // Display the image from assets if available, otherwise show a placeholder.
             if let pictureName = questions[currentQuestionIndex].picture, !pictureName.isEmpty {
-                Image(pictureName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
-                    .clipped()
-                    .padding()
+                ZStack(alignment: .topTrailing) {
+                    Image(pictureName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 260)
+                        .frame(width: 400)
+                        .clipped()
+                        .padding()
+                    Button(action: {
+                        showEnlargedImage = true
+                    }) {
+                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+                            .padding(8)
+                            .background(Color.black.opacity(0.6))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .padding(20)
+                    }
+                }
+                .fullScreenCover(isPresented: $showEnlargedImage) {
+                    EnlargedPhotoView(imageName: pictureName)
+                }
             } else {
                 Rectangle()
                     .fill(Color.green.opacity(0.3))
@@ -36,7 +53,6 @@ struct Round1View: View {
                     .overlay(Text("Image Placeholder").foregroundColor(.black))
                     .padding()
             }
-            
             
             Text(questions[currentQuestionIndex].text)
                 .font(.title2)
@@ -54,11 +70,9 @@ struct Round1View: View {
                 ForEach(questions[currentQuestionIndex].options.indices, id: \.self) { index in
                     let option = questions[currentQuestionIndex].options[index]
                     Button(action: {
-                        // Calculate elapsed time.
                         let elapsed = Date().timeIntervalSince(questionStartTime)
                         elapsedTime = elapsed
                         
-                        // Check correctness and update stats.
                         let isCorrect = index == questions[currentQuestionIndex].answer
                         if isCorrect {
                             metricsLogger.log("Round1 Q\(currentQuestionIndex+1): Correct! Time: \(elapsed) seconds")
@@ -68,13 +82,11 @@ struct Round1View: View {
                         }
                         statsManager.stats.round1ResponseTimes.append(elapsed)
                         
-                        // Move to the next question or finish the round.
                         if currentQuestionIndex < questions.count - 1 {
                             currentQuestionIndex += 1
                             questionStartTime = Date() // reset timer for next question
                             elapsedTime = nil
                         } else {
-                            // Round finished: record total time.
                             statsManager.stats.round1TotalTime = Date().timeIntervalSince(roundStartTime)
                             finished = true
                         }
@@ -109,7 +121,9 @@ struct Round1View: View {
 struct Round1View_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Round1View().environmentObject(metricsLoggerForPreview()).environmentObject(GameStatsManager())
+            Round1View()
+                .environmentObject(metricsLoggerForPreview())
+                .environmentObject(GameStatsManager())
         }
     }
 }

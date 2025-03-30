@@ -16,7 +16,7 @@ struct Round2View: View {
     @State private var questionStartTime = Date()
     @State private var elapsedTime: TimeInterval? = nil
     @State private var roundStartTime = Date()
-    @State private var audioFinished = true  
+    @State private var audioFinished = true
 
     let questions = Questions.round2
 
@@ -137,3 +137,7 @@ struct Round2View_Previews: PreviewProvider {
         }
     }
 }
+
+
+//Note to Mathew: Disabled System messages due to them be overcrowed with messages from including voice (It is normal but here is how I did if i need to renable the system messages in the future
+// Menu Bar -> Product -> Scheme -> Edit Scheme -> Enviroment Virables -> Uncheck "OS_ACTIVITY_MODE" 
