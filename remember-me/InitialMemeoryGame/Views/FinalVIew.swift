@@ -24,7 +24,6 @@ struct FinalView: View {
                     .font(.largeTitle)
                     .padding(.bottom, 10)
 
-                // MARK: - Game Summary
                 Text("Game Summary")
                     .font(.title2)
                     .bold()
@@ -57,26 +56,25 @@ struct FinalView: View {
 
                 Divider()
 
-                Text("📋 All answers were logged and your performance has been recorded.")
+                Text(" All answers were logged and your performance has been recorded.")
                     .padding(.top)
                     .bold()
 
-                // MARK: - Prediction
+         
                 if let diagnosis = predictedDiagnosis {
-                    Text("🧬 Predicted Diagnosis: \(diagnosis.capitalized)")
+                    Text(" Predicted Diagnosis: \(diagnosis.capitalized)")
                         .font(.title2)
                         .foregroundColor(.blue)
                         .padding(.top)
                 } else {
-                    Text("🔄 Predicting diagnosis...")
+                    Text("Predicting diagnosis...")
                         .foregroundColor(.gray)
                         .padding(.top)
                 }
 
                 Divider()
 
-                // MARK: - User Logs
-                Text("📝 Your Answer Summary")
+                Text("Your Answer Summary")
                     .font(.title2)
                     .bold()
                     .padding(.top)
