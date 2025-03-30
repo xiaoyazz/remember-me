@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainMemeoryView: View {
     @StateObject var metricsLogger = MetricsLogger()
+    @StateObject var statsManager = GameStatsManager()  
     @State private var showRound1 = false
 
     var body: some View {
@@ -28,16 +29,19 @@ struct MainMemeoryView: View {
                     .cornerRadius(10)
             }
         }
-        // Wrap Round1View inside a NavigationView (iOS 15 or below) or NavigationStack (iOS 16+)
         .fullScreenCover(isPresented: $showRound1) {
-             NavigationStack {
-                 Round1View().environmentObject(metricsLogger)
-             }
-             .navigationBarBackButtonHidden(true)
+            NavigationStack {
+                Round1View()
+                    .environmentObject(metricsLogger)
+                    .environmentObject(statsManager)
+            }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
 
-#Preview {
-    MainMemeoryView()
+struct MainMemeoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainMemeoryView()
+    }
 }

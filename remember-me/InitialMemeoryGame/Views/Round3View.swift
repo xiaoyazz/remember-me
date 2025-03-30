@@ -9,21 +9,22 @@ import SwiftUI
 
 struct Round3View: View {
     @EnvironmentObject var metricsLogger: MetricsLogger
+    @EnvironmentObject var statsManager: GameStatsManager
+    
     @State private var currentQuestionIndex = 0
     @State private var finished = false
     @State private var questionStartTime = Date()
     @State private var elapsedTime: TimeInterval? = nil
+    @State private var roundStartTime = Date()
     
-    // Use round3 questions from the Questions struct.
     let questions = Questions.round3
 
     var body: some View {
         VStack {
             Text(questions[currentQuestionIndex].text)
-                .padding()
                 .font(.title2)
+                .padding()
             
-            // Display elapsed time if available.
             if let elapsed = elapsedTime {
                 Text(String(format: "Time to answer: %.2f seconds", elapsed))
                     .font(.subheadline)
@@ -34,24 +35,24 @@ struct Round3View: View {
             ForEach(questions[currentQuestionIndex].options.indices, id: \.self) { index in
                 let option = questions[currentQuestionIndex].options[index]
                 Button(action: {
-                    // Calculate elapsed time.
                     let elapsed = Date().timeIntervalSince(questionStartTime)
                     elapsedTime = elapsed
                     
                     let isCorrect = index == questions[currentQuestionIndex].answer
                     if isCorrect {
                         metricsLogger.log("Round3 Q\(currentQuestionIndex+1): Correct! Time: \(elapsed) seconds")
+                        statsManager.stats.round3Correct += 1
                     } else {
                         metricsLogger.log("Round3 Q\(currentQuestionIndex+1): Incorrect. Selected: \(option) - Time: \(elapsed) seconds")
                     }
+                    statsManager.stats.round3ResponseTimes.append(elapsed)
                     
-                    // Move to the next question or finish the round.
                     if currentQuestionIndex < questions.count - 1 {
                         currentQuestionIndex += 1
-                        // Reset timer for the next question.
                         questionStartTime = Date()
                         elapsedTime = nil
                     } else {
+                        statsManager.stats.round3TotalTime = Date().timeIntervalSince(roundStartTime)
                         finished = true
                     }
                 }) {
@@ -66,7 +67,7 @@ struct Round3View: View {
             }
             
             NavigationLink(
-                destination: FinalView().environmentObject(metricsLogger),
+                destination: FinalView().environmentObject(statsManager).environmentObject(metricsLogger),
                 isActive: $finished
             ) {
                 EmptyView()
@@ -84,7 +85,7 @@ struct Round3View: View {
 struct Round3View_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Round3View().environmentObject(MetricsLogger())
+            Round3View().environmentObject(metricsLoggerForPreview()).environmentObject(GameStatsManager())
         }
     }
 }

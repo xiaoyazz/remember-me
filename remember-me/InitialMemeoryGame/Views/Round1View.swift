@@ -9,23 +9,41 @@ import SwiftUI
 
 struct Round1View: View {
     @EnvironmentObject var metricsLogger: MetricsLogger
+    @EnvironmentObject var statsManager: GameStatsManager
+    
     @State private var currentQuestionIndex = 0
     @State private var finished = false
-    @State private var questionStartTime = Date()  // Start time for the current question
-    @State private var elapsedTime: TimeInterval? = nil  // Elapsed time for the answered question
+    @State private var questionStartTime = Date()
+    @State private var elapsedTime: TimeInterval? = nil
+    @State private var roundStartTime = Date()
+    @State private var showEnlargedImage = false  // New state to control the enlarged photo
     
     let questions = Questions.round1
 
     var body: some View {
         VStack {
-
+            // Display the image from assets if available, otherwise show a placeholder.
             if let pictureName = questions[currentQuestionIndex].picture, !pictureName.isEmpty {
-                Image(pictureName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
-                    .clipped()
-                    .padding()
+                ZStack(alignment: .topTrailing) {
+                    Image(pictureName)
+                        .resizable()
+                        .frame(height: 260)
+                        .frame(width: 400)
+                        .padding()
+                    Button(action: {
+                        showEnlargedImage = true
+                    }) {
+                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+                            .padding(8)
+                            .background(Color.black.opacity(0.6))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .padding(20)
+                    }
+                }
+                .fullScreenCover(isPresented: $showEnlargedImage) {
+                    EnlargedPhotoView(imageName: pictureName)
+                }
             } else {
                 Rectangle()
                     .fill(Color.green.opacity(0.3))
@@ -34,12 +52,11 @@ struct Round1View: View {
                     .padding()
             }
             
-            
             Text(questions[currentQuestionIndex].text)
                 .font(.title2)
                 .padding()
             
-            // Display the elapsed time for the last answered question if available.
+            // Display elapsed time for the last answered question.
             if let elapsed = elapsedTime {
                 Text(String(format: "Time to answer: %.2f seconds", elapsed))
                     .font(.subheadline)
@@ -51,22 +68,24 @@ struct Round1View: View {
                 ForEach(questions[currentQuestionIndex].options.indices, id: \.self) { index in
                     let option = questions[currentQuestionIndex].options[index]
                     Button(action: {
-                        // Calculate how long the user took for this question.
                         let elapsed = Date().timeIntervalSince(questionStartTime)
                         elapsedTime = elapsed
+                        
                         let isCorrect = index == questions[currentQuestionIndex].answer
                         if isCorrect {
                             metricsLogger.log("Round1 Q\(currentQuestionIndex+1): Correct! Time: \(elapsed) seconds")
+                            statsManager.stats.round1Correct += 1
                         } else {
                             metricsLogger.log("Round1 Q\(currentQuestionIndex+1): Incorrect. Selected: \(option) - Time: \(elapsed) seconds")
                         }
-                        // Move to the next question or finish the round.
+                        statsManager.stats.round1ResponseTimes.append(elapsed)
+                        
                         if currentQuestionIndex < questions.count - 1 {
                             currentQuestionIndex += 1
-                            // Reset the timer for the next question.
-                            questionStartTime = Date()
+                            questionStartTime = Date() // reset timer for next question
                             elapsedTime = nil
                         } else {
+                            statsManager.stats.round1TotalTime = Date().timeIntervalSince(roundStartTime)
                             finished = true
                         }
                     }) {
@@ -82,7 +101,7 @@ struct Round1View: View {
             }
             
             NavigationLink(
-                destination: Round2View().environmentObject(metricsLogger),
+                destination: Round2View().environmentObject(statsManager).environmentObject(metricsLogger),
                 isActive: $finished
             ) {
                 EmptyView()
@@ -100,7 +119,15 @@ struct Round1View: View {
 struct Round1View_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            Round1View().environmentObject(MetricsLogger())
+            Round1View()
+                .environmentObject(metricsLoggerForPreview())
+                .environmentObject(GameStatsManager())
         }
     }
+}
+
+// Helper for previews
+func metricsLoggerForPreview() -> MetricsLogger {
+    let logger = MetricsLogger()
+    return logger
 }
