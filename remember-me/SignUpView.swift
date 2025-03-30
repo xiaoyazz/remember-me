@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     @State private var name = ""
+    @State private var age = ""
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
@@ -37,6 +38,10 @@ struct SignUpView: View {
 
             TextField("Name", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            TextField("Age", text: $age)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.numberPad)
 
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
