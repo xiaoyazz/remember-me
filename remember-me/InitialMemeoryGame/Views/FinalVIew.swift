@@ -85,7 +85,7 @@ struct FinalView: View {
                         .padding(.top, 4)
                 } else {
                     ForEach(metricsLogger.logs.indices, id: \.self) { index in
-                        Text("• \(metricsLogger.logs[index])")
+                        Text("\(metricsLogger.logs[index])")
                             .padding(.vertical, 2)
                     }
                 }

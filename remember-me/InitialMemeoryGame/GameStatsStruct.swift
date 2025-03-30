@@ -25,6 +25,10 @@ struct GameStats {
     
     //Repeated parts
     var round2AudioReplays: Int = 0
+    
+    //Age of the user
+    var userAge: Int = 50
+    
 
     
     // Computed properties for average response times per round.

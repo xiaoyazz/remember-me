@@ -7,29 +7,38 @@
 
 import SwiftUI
 
-struct FollowingListView: View {
-    @Binding var users: [FollowableUser]
-
-    // Filter followed users
+struct FollowingUserListView: View {
+    @ObservedObject var viewModel: FirebaseUserDirectoryViewModel
+    
     var followedUsers: [FollowableUser] {
-        users.filter { $0.isFollowing }
+        viewModel.users.filter { $0.isFollowing }
     }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 if followedUsers.isEmpty {
-                    Text("You're not following anyone yet.")
-                        .font(.title3)
+                    Text("Not following anyone yet.")
                         .foregroundColor(.gray)
                         .padding()
                 } else {
                     ForEach(followedUsers.indices, id: \.self) { index in
-                        let followedUser = followedUsers[index]
-                        UserCardView(
-                            user: followedUser.user,
-                            isFollowing: binding(for: followedUser.id)
-                        )
+                        let item = followedUsers[index]
+                        
+                        if let realIndex = viewModel.users.firstIndex(where: { $0.id == item.id }) {
+                            let binding = Binding<Bool>(
+                                get: { viewModel.users[realIndex].isFollowing },
+                                set: { newVal in
+                                    viewModel.users[realIndex].isFollowing = newVal
+                                    viewModel.toggleFollow(for: item.id)
+                                }
+                            )
+                            
+                            UserCardView(
+                                user: item.user,
+                                isFollowing: binding
+                            )
+                        }
                     }
                 }
             }
@@ -37,21 +46,13 @@ struct FollowingListView: View {
         }
         .navigationTitle("Following")
     }
-
-    // Provide binding to the user's follow state
-    private func binding(for id: UUID) -> Binding<Bool> {
-        guard let index = users.firstIndex(where: { $0.id == id }) else {
-            return .constant(false)
-        }
-        return $users[index].isFollowing
-    }
 }
 
 #Preview {
-    StatefulPreviewWrapper([
-        FollowableUser(user: User(name: "Test User", age: "30", email: "test@example.com", accountType: "Patient"), isFollowing: true),
-        FollowableUser(user: User(name: "Not Followed", age: "40", email: "nope@example.com", accountType: "Patient"), isFollowing: false)
-    ]) { users in
-        FollowingListView(users: users)
-    }
+    let testViewModel = FirebaseUserDirectoryViewModel()
+    
+    // Optionally, you can add some mock data here if you want immediate preview
+    // e.g. testViewModel.users = [FollowableUser(...), FollowableUser(...)]
+
+    return FollowingUserListView(viewModel: testViewModel)
 }

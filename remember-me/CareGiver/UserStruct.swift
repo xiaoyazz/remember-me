@@ -16,7 +16,8 @@ struct User: Identifiable {
 }
 
 struct FollowableUser: Identifiable {
-    let id = UUID()
+    let id: String          
     var user: User
     var isFollowing: Bool
 }
+

@@ -28,7 +28,7 @@ struct UserCardView: View {
 
                 Button(action: {
                     withAnimation {
-                        isFollowing.toggle()
+                        isFollowing.toggle()  // We rely on a custom Binding from the parent
                     }
                 }) {
                     HStack {
@@ -50,6 +50,7 @@ struct UserCardView: View {
         .padding(.horizontal)
     }
 }
+
 
 
 #Preview {

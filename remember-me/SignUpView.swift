@@ -108,7 +108,7 @@ struct SignUpView: View {
                 return
             }
 
-            // ✅ Save extra user info to Firestore
+            // Save extra user info to Firestore
             let db = Firestore.firestore()
             db.collection("users").document(result!.user.uid).setData([
                 "name": name,

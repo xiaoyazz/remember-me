@@ -13,6 +13,8 @@ class GameStatsManager: ObservableObject {
     
     func featureVector() -> [String: Double] {
             var features = [String: Double]()
+        
+            features["userAge"] = Double(stats.userAge)
             
             features["round1Correct"] = Double(stats.round1Correct)
             features["round2Correct"] = Double(stats.round2Correct)
