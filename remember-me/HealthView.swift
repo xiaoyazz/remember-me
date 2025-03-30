@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HealthView: View {
+    
+    @ObservedObject var manager = HealthDataManager.shared
+    
     // Mocked data
     let heartRate = 72
     let lastFallDetected = "2 days ago"
@@ -30,13 +33,12 @@ struct HealthView: View {
                     VStack(alignment: .leading) {
                         Text("Heart Rate")
                             .font(.headline)
-                        Text("\(heartRate) BPM")
+                        Text("\(manager.heartRate) BPM")
                             .font(.title2)
                             .bold()
                     }
                     Spacer()
                 }
-
                 // Fall Detection
                 HStack {
                     Image(systemName: "figure.fall")
@@ -44,7 +46,7 @@ struct HealthView: View {
                     VStack(alignment: .leading) {
                         Text("Last Fall Detected")
                             .font(.headline)
-                        Text(lastFallDetected)
+                        Text(manager.lastFallDetected)
                     }
                     Spacer()
                 }
@@ -99,6 +101,9 @@ struct HealthView: View {
                 }
             }
             .padding()
+            .onAppear {
+                manager.sendMockHealthDataToWatch()
+            }
         }
     }
 }
