@@ -1,6 +1,7 @@
 # Remember Me
 
 Supporting Alzheimer's care with personalized digital assistance.
+An group project for BearHacks 2025.
 
 ---
   
