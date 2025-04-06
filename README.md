@@ -3,9 +3,6 @@
 Supporting Alzheimer's care with personalized digital assistance.
 
 ---
-
-## 🧠 Inspiration
-I feel what inspired us to do this project was being able to give support to the people who need the most ,specifically the elderly and the elderly with Alzheimer's
   
 ## 💡 What it does
 
@@ -27,11 +24,11 @@ I feel what inspired us to do this project was being able to give support to the
 - **HealthView** using mock data to simulate a real Apple Watch connection
 
 ## ⚠️ Challenges we ran into
--Creating mini games that are both fun and scientifically valid for detecting early signs of Alzheimer's 
--Capturing accurate and Granular Metrics within the game like speed to answer time between answering etc 
--Building a Real-Time Analytics Pipeline
+- Creating mini games that are both fun and scientifically valid for detecting early signs of Alzheimer's 
+- Capturing accurate and Granular Metrics within the game like speed to answer time between answering etc 
+- Building a Real-Time Analytics Pipeline
      -Implementing logging for each response with timestamps and metadata
--Machine Learning Overfitting
+- Machine Learning Overfitting
      -Early versions of synthetic data led to models way overfitting due to the poor quality of our synthetic     data 
 - I think one of the hardest task that we ran into was Synthetic Data Engineering
       -Out dataset is still not very good which leads to our ML algorithm to not being the most accurate  
@@ -42,7 +39,7 @@ I feel what inspired us to do this project was being able to give support to the
 - Created meaningful features like “Faces I Love” and emergency assistance that address real problems
 
 ## 📚 What we learned
--We feel one of the biggest lessons we learned as a team was not to bite off more then we can chew, we feel if we kept our scope much smaller we would have been able to deliver an even better project. However we suffered from scope creep and wanted to do so much all at once which lead to a lot of features not being fully developed or polished out  
+- We feel one of the biggest lessons we learned as a team was not to bite off more then we can chew, we feel if we kept our scope much smaller we would have been able to deliver an even better project. However we suffered from scope creep and wanted to do so much all at once which lead to a lot of features not being fully developed or polished out  
 
 ## 🔮 What's next for Remember Me
 - If we have time as a team i would really like to go back and retrain the ML algorithm so it can be more accurate, as well as fully fleshing out all the features 
