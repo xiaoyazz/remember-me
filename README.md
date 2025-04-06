@@ -1,7 +1,7 @@
 # Remember Me
 
 Supporting Alzheimer's care with personalized digital assistance.
-An group project for BearHacks 2025.
+A group project for BearHacks 2025.
 
 ---
   
@@ -16,7 +16,6 @@ An group project for BearHacks 2025.
 - 🆘 **SOS emergency feature** with medical info, location, and quick contact buttons  
 - ⌚ **Apple Watch connectivity** for health and fall detection
 
----
 ## 🛠 How we built it
 - **SwiftUI** for clean, modular iOS UI  
 - **Firebase Authentication & Firestore** for secure login and personalized data storage  
